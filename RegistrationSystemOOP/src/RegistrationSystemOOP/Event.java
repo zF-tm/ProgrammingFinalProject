@@ -73,25 +73,7 @@ public class Event {
 
     public void setDate(int date) {
 
-        int day = date % 100;
-        int month = (date / 100) % 100;
-        int year = date / 10000;
-
-        if (date < 10000000 || date > 99999999) {
-            System.out.println("Wrong syntax, please use YYYYMMDD.");
-        }
-        else if (year < 2026) {
-            System.out.println("Year must be 2026 or later.");
-        }
-        else if (month < 1 || month > 12) {
-            System.out.println("Invalid month.");
-        }
-        else if (day < 1 || day > daysInMonth(month)) {
-            System.out.println("Invalid day for this month.");
-        }
-        else {
-            this.date = date;
-        }
+    	this.date = date;
     }
 
     public static int daysInMonth(int month) {

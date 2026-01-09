@@ -251,32 +251,37 @@ public class Main {
 	}
 	
 	public static void registerParticipant(Scanner scanner) {
-		printAllEvents();
-		System.out.println("Enter The ID of the event u want to register a participant in: ");
-		int searchID = scanner.nextInt();
-		searchID--;
-		scanner.nextLine();
-		boolean found = false;
-		for(int i = 0 ; i<ids.size(); i++) {
-			if(searchID == i) {
-				found = true;
-				break;
+		if(events.isEmpty()) {
+			System.out.println("No Events Yet.");
+		} else {
+			printAllEvents();
+			System.out.println("Enter The ID of the event u want to register a participant in: ");
+			int searchID = scanner.nextInt();
+			searchID--;
+			scanner.nextLine();
+			boolean found = false;
+			for(int i = 0 ; i<ids.size(); i++) {
+				if(searchID == i) {
+					found = true;
+					break;
+				}
+			}
+			
+			if(found && participants.get(searchID).size() < capacities.get(searchID)) {
+				System.out.println("Enter the name of the participant you want to add: ");
+				String name = scanner.nextLine();
+				while(!participantNameValid(name,searchID)) {
+					System.err.println("Name Either duplicated or empty, please choose another name: ");
+					name = scanner.nextLine();
+				}
+				participants.get(searchID).add(name);
+			} else if (!found) {
+				System.err.println("Event id not found");
+			} else if(participants.get(searchID).size() >= capacities.get(searchID)) {
+				System.err.println("This event is full.");
 			}
 		}
 		
-		if(found && participants.get(searchID).size() < capacities.get(searchID)) {
-			System.out.println("Enter the name of the participant you want to add: ");
-			String name = scanner.nextLine();
-			while(!participantNameValid(name,searchID)) {
-				System.err.println("Name Either duplicated or empty, please choose another name: ");
-				name = scanner.nextLine();
-			}
-			participants.get(searchID).add(name);
-		} else if (!found) {
-			System.err.println("Event id not found");
-		} else if(participants.get(searchID).size() >= capacities.get(searchID)) {
-			System.err.println("This event is full.");
-		}
 	}
 	
 	public static void printRegistrationReport() {

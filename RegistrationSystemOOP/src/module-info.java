@@ -5,4 +5,5 @@
  * 
  */
 module RegistrationSystemOOP {
+	exports RegistrationSystemOOP;
 }
