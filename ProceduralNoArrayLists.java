@@ -274,8 +274,15 @@ public class Main {
             scanner.nextLine();
             
             boolean found = false;
-            if (searchID >= 0 && searchID < eventCount) {
-                found = true;
+            int foundIndex = -1; 
+            
+            
+            for(int i = 0; i < eventCount; i++) {
+                if(ids[i] == inputID) {
+                    found = true;
+                    foundIndex = i; 
+                    break;
+                }
             }
 
             if (found && participantCounts[searchID] < capacities[searchID]) {
