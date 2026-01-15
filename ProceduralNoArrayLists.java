@@ -269,37 +269,36 @@ public class Main {
         } else {
             printAllEvents();
             System.out.println("Enter The ID of the event u want to register a participant in: ");
-            int searchID = scanner.nextInt();
-            searchID--; 
+            int searchID = scanner.nextInt(); 
             scanner.nextLine();
             
             boolean found = false;
-            int foundIndex = -1; 
+             
             
             
-            for(int i = 0; i < eventCount; i++) {
-                if(ids[i] == inputID) {
+            for(int i = 0; i <= eventCount; i++) {
+                if(ids[i] == searchID) {
                     found = true;
-                    foundIndex = i; 
+                    
                     break;
                 }
             }
 
-            if (found && participantCounts[searchID] < capacities[searchID]) {
+            if (found && participantCounts[searchID-1] < capacities[searchID-1]) {
                 System.out.println("Enter the name of the participant you want to add: ");
                 String name = scanner.nextLine();
-                while (!participantNameValid(name, searchID)) {
+                while (!participantNameValid(name, searchID-1)) {
                     System.err.println("Name Either duplicated or empty, please choose another name: ");
                     name = scanner.nextLine();
                 }
                 
-                int currentCount = participantCounts[searchID];
-                participants[searchID][currentCount] = name;
-                participantCounts[searchID]++; 
+                int currentCount = participantCounts[searchID-1];
+                participants[searchID-1][currentCount] = name;
+                participantCounts[searchID-1]++; 
                 
             } else if (!found) {
                 System.err.println("Event id not found");
-            } else if (participantCounts[searchID] >= capacities[searchID]) {
+            } else if (participantCounts[searchID-1] >= capacities[searchID-1]) {
                 System.err.println("This event is full.");
             }
         }
